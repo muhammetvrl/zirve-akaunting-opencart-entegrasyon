@@ -1,0 +1,19 @@
+{
+  "name": "bitirme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zongji": "^0.4.6"
+  },
+  "devDependencies": {
+    "date-format": "^2.0.0",
+    "mysql": "^2.16.0",
+    "mysql-events": "0.0.11"
+  }
+}
