@@ -4,13 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node order.js && node products.js && node customer.js"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "zongji": "^0.4.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "date-format": "^2.0.0",
     "mysql": "^2.16.0",

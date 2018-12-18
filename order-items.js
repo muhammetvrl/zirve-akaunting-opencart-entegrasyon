@@ -1,10 +1,3 @@
-var MySQLEvents = require('mysql-events');
-var mysql = require('mysql');
-var format = require('date-format');
-
-format(); 
-format(new Date());
-var date=format('yyyy-MM-dd hh:mm:ss', new Date());
 
 var opencartdb = {
     host: 'localhost',
@@ -42,6 +35,7 @@ var opencartdb = {
             console.log('eKLENENE Müşteri Id:' + results.insertId);
            });
        }
+  
 
 
       if (oldRow !== null && newRow !== null) {
@@ -77,4 +71,4 @@ var opencartdb = {
     'Active'
   );
   
-  module.exports = watcher;
+  

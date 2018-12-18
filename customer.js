@@ -1,32 +1,32 @@
-var MySQLEvents = require('mysql-events');
-var mysql = require('mysql');
-var format = require('date-format');
+    var MySQLEvents = require('mysql-events');
+    var mysql = require('mysql');
+    var format = require('date-format');
 
-format(); 
-format(new Date());
-var date=format('yyyy-MM-dd hh:mm:ss', new Date());
+    format(); 
+    format(new Date());
+    var date=format('yyyy-MM-dd hh:mm:ss', new Date());
 
-var akauntingdb = {
-    host: 'localhost',
-    user: 'root',
-    password: '' // no password set that's why keep blank
-  };
-  var mysqlEventWatcher = MySQLEvents(akauntingdb);
+    var akauntingdb = {
+      host: 'localhost',
+      user: 'root',
+      password: '' // no password set that's why keep blank
+    };
   
   var opencart = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'opencart'
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'opencart'
   });
   
   opencart.connect();
 
-  let kullanici;
-  
+  var mysqlEventWatcher = MySQLEvents(akauntingdb);
   var watcher = mysqlEventWatcher.add(
     'akaunting.dgi_customers',
     function (oldRow, newRow, event) {
+ 
+       var kullanici;
         
       if (oldRow === null) {
 
@@ -77,5 +77,9 @@ var akauntingdb = {
     },
     'Active'
   );
+
+  
+  
+
   
   
