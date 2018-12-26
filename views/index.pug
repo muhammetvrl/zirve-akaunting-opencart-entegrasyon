@@ -11,15 +11,15 @@ html(language=en)
     .container
         .row
             .col-md-4
-                form
+                form(method='POST' action='/zirve')
                     .form-group
                         h2 Akaunting
                         label(for='Database') Database
-                        input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter Databese')
+                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' name='database' placeholder='Enter Databese')
                         label(for='User') User
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter User')
+                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' name='user' placeholder='Enter User')
                         label(for='exampleInputPassword1') Password
-                        input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+                        input#exampleInputPassword1.form-control(type='password' placeholder='Password' name='password')
                     .form-check
                     button.btn.btn-primary(type='submit') Submit
 
