@@ -10,8 +10,8 @@ html(language=en)
   body
     .container
         .row
-            .col-md-4
-                form(method='POST' action='/zirve')
+            .col-md-6
+                form(method='POST' action='/akaunting')
                     .form-group
                         h2 Akaunting
                         label(for='Database') Database
@@ -20,30 +20,34 @@ html(language=en)
                         input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' name='user' placeholder='Enter User')
                         label(for='exampleInputPassword1') Password
                         input#exampleInputPassword1.form-control(type='password' placeholder='Password' name='password')
-                    .form-check
-                    button.btn.btn-primary(type='submit') Submit
 
-            .col-md-4
-                form
+                        h2 OpenCart
+                        label(for='Database') Database
+                        input#exampleInputEmail1.form-control(type='text'  name='opencartdb' placeholder='Enter Databese')
+                        label(for='User') User
+                        input#exampleInputEmail1.form-control(type='text'  name='opencartuser' placeholder='Enter User')
+                        label(for='exampleInputPassword1') Password
+                        input#exampleInputPassword1.form-control(type='password' placeholder='Password'  name='opencartpw')
+                    .form-check
+                    button.btn.btn-primary(type='submit') Akaunting Sync Başlat
+            .col-md-6
+                 form(method='POST' action='/zirve')
                     .form-group
                         h2 Zirve
                         label(for='Database') Database
-                        input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter Databese')
+                        input#exampleInputEmail1.form-control(type='text' name='database'  placeholder='Enter Databese')
                         label(for='User') User
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter User')
+                        input#exampleInputEmail1.form-control(type='text' name='user' placeholder='Enter User')
                         label(for='exampleInputPassword1') Password
-                        input#exampleInputPassword1.form-control(type='password' placeholder='Password')
-                    .form-check
-                    button.btn.btn-primary(type='submit') Submit
-            .col-md-4
-                form
-                    .form-group
+                        input#exampleInputPassword1.form-control(type='password'  placeholder='Password' name='password')
+
                         h2 OpenCart
                         label(for='Database') Database
-                        input#exampleInputEmail1.form-control(type='email' aria-describedby='emailHelp' placeholder='Enter Databese')
+                        input#exampleInputEmail1.form-control(type='text'  name='opencartdb' placeholder='Enter Databese')
                         label(for='User') User
-                        input#exampleInputEmail1.form-control(type='text' aria-describedby='emailHelp' placeholder='Enter User')
+                        input#exampleInputEmail1.form-control(type='text'  name='opencartuser' placeholder='Enter User')
                         label(for='exampleInputPassword1') Password
-                        input#exampleInputPassword1.form-control(type='password' placeholder='Password')
+                        input#exampleInputPassword1.form-control(type='password' placeholder='Password'  name='opencartpw')
                     .form-check
-                    button.btn.btn-primary(type='submit') Submit
+                    button.btn.btn-primary(type='submit') Zirve Eşitle
+        

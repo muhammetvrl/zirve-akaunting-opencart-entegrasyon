@@ -17,7 +17,8 @@
     "jsonfile": "^5.0.0",
     "msnodesqlv8": "^0.6.11",
     "mssql": "^4.3.0",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "reload": "^2.4.0"
   },
   "devDependencies": {
     "date-format": "^2.0.0",

@@ -1,0 +1,63 @@
+doctype=html
+html(language=en)
+  head
+
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css", integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r", crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+    
+  body
+   .container
+        .alert.alert-info(role='alert') Akaunting Bağlantı Başarılı. İşlemler Takip Ediliyor.
+          
+        h2 Değişilikler 
+        hr
+        
+        .alert.alert-warning(role='alert') Müşteriler
+
+         table.table
+            thead.thead-dark
+              tr
+                th(scope='col') islem
+                th(scope='col') id
+                th(scope='col') firstname
+                th(scope='col') lastname
+                th(scope='col') email
+                th(scope='col') telephone
+            each item in data
+              tr
+                td= item.islem
+                td= item.id
+                td= item.firstname
+                td= item.lastname
+                td= item.email
+                td= item.telephone
+        hr
+
+        .alert.alert-info(role='alert') Ürünler
+
+          table.table
+              thead.thead-dark
+                tr
+                  th(scope='col') islem
+                  th(scope='col') product_id
+                  th(scope='col') name
+                  th(scope='col') description
+                  th(scope='col') sku
+                  th(scope='col') price
+                  th(scope='col') quantity
+
+              each item in dataproduct
+                tr
+                  td= item.islem
+                  td= item.product_id
+                  td= item.name
+                  td= item.description
+                  td= item.sku
+                  td= item.price
+                  td= item.quantity
+
+          
+
+

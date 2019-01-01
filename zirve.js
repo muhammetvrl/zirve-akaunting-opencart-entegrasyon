@@ -1,3 +1,5 @@
+var zirve= function (){
+
 var fs = require("fs");
 const sql = require("msnodesqlv8");
 const jsonfile = require('jsonfile');
@@ -14,6 +16,7 @@ database : 'opencart'
 
 opencart.connect();
 
+
 format(); 
   format(new Date());
   var date=format('yyyy-MM-dd hh:mm:ss', new Date());
@@ -21,7 +24,6 @@ format();
 const connectionString = "server=localhost\\BITIRME;Database=BİTİRME_2018;Trusted_Connection=Yes;Driver={SQL Server}";
 
 const query = "SELECT * FROM dbo.stokgenm";
-var row=[];
 
 let data = fs.readFileSync('data.json');  
 let datajson = JSON.parse (data); 
@@ -42,6 +44,7 @@ sql.query(connectionString, query, (err, rows) => {
        if( element[0]=="+"){
         
         var product=element[1];
+        row.push(product);
 
         let sql = `INSERT INTO oc_product(product_id, model, sku,
             upc, ean, jan, isbn, mpn, location,quantity,
@@ -94,6 +97,8 @@ sql.query(connectionString, query, (err, rows) => {
 
        if( element[0]=="-"){
         let product = element[1];
+        row.push(product);
+
         let sql=`DELETE FROM oc_product WHERE product_id=${product.Stk}`;
         let sql1=`DELETE FROM oc_product_description WHERE product_id=${product.Stk}`;
 
@@ -109,27 +114,23 @@ sql.query(connectionString, query, (err, rows) => {
         opencart.end();
 
     }
-       
-
     });
         jsonfile.writeFile("./data.json", rows, function (err) {
             if (err) console.error(err)
              console.log("Dosya Yazıldı!");
-
         });
     }
     else{
         console.log("Değişiklik Yok");
+        row='Değişiklik Olmadı...';
         opencart.end();
-    }
 
-
-
-  
-   
-   
+    }   
 });
 
+}
 
-
-
+zirve();
+module.exports.zirveSync=zirve;
+module.exports.row = row;
+console.log(row);
