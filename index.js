@@ -9,7 +9,6 @@ const jsonfile = require('jsonfile');
 var mysql = require('mysql');
 var format = require('date-format');
 var jsonDiff = require('json-diff')
-var reload = require('reload')
 
 
 var app = express();
@@ -78,6 +77,14 @@ app.get('/akauntingch', function (req, res) {
     res.render('akauntingch',{dataproduct:dataproduct, data:data});
   connection.end();
   })
+})
+
+app.get('/orderakaunting', function (req, res) {
+  order();
+  res.render('orderakaunting');
+})
+app.get('/orderakauntingch', function (req, res) {
+  res.render('orderakauntingch');
 })
 
 app.get('/', function (req, res) {
@@ -220,7 +227,6 @@ app.post('/akaunting', function (req, res) {
 res.render("akaunting",req.body)
 akauntingSync();
 
-order();
 
 })
 

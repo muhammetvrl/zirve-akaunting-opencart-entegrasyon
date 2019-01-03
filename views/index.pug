@@ -29,7 +29,13 @@ html(language=en)
                         label(for='exampleInputPassword1') Password
                         input#exampleInputPassword1.form-control(type='password' placeholder='Password'  name='opencartpw')
                     .form-check
-                    button.btn.btn-primary(type='submit') Akaunting Sync Başlat
+                    .col-md-12
+                       button.btn.btn-primary.btn-md(type='submit') Akaunting Müşteri ve Ürün Sync Başlat 
+                       br
+                       br
+                    .col-md-12 
+                        a.btn.btn-primary.btn-md(href='http://localhost:3000/orderakaunting' role='button') Sipariş Değişikleri için Senkronizasyon Başlat.
+
             .col-md-6
                  form(method='POST' action='/zirve')
                     .form-group

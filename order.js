@@ -38,15 +38,12 @@ var opencartdb = {
   var watcher = mysqlEventWatcher.add(
     'opencart.oc_order',
     function (oldRow, newRow, event) {
-  
+    var orderproduct;
     if (oldRow === null) {
 
     var order = newRow.fields;
     var resultdata;
         let sql = `INSERT INTO dgi_invoices(id, company_id, invoice_number, order_number, invoice_status_code, invoiced_at, due_at, amount, currency_code, currency_rate, customer_id, customer_name, customer_email, customer_phone, customer_address, notes, created_at, updated_at, category_id, parent_id)  VALUES ('${order.order_id}','1','${order.invoice_prefix}+${order.order_id}','${order.order_id}','draft','${date}','${date}','${order.total}','${order.currency_code}','${order.currency_id}','${order.customer_id}','${order.firstname} ${order.lastname}','${order.email}','${order.telephone}','${order.shipping_country} ${order.shipping_city} ${order.shipping_address_1}','${order.comment}','${date}','${date}','${order.marketing_id}','0')`;
-
-
-        console.log(order);
 
         var query = akaunting.query(sql, function (error, results, fields) {
         if (error) throw error;
@@ -71,11 +68,12 @@ var opencartdb = {
             reward: results[0].reward 
         }
             let sql1=`INSERT INTO dgi_invoice_items(id,company_id, invoice_id, item_id, name , quantity, price, total, tax, tax_id ,created_at,updated_at)  VALUES(${product.order_id},'1','${order.order_id}','1','${product.name}','${product.quantity}','${product.price}','${product.total}','${product.tax}','1','${date}','${date}')`;
-            
+
             var query = akaunting.query(sql1, function (error, results, fields) {
             if (error) throw error;
             console.log('eKLENENE Müşteri Id:' + results.insertId);
-            });         
+            });   
+
         });
     }
 
@@ -92,25 +90,22 @@ var opencartdb = {
             if (error) throw error;
             console.log('Silinen Siparis Id:' + order.order_id);
             });
+
+          
     }
     
-    // if (oldRow !== null && newRow !== null) {
+   if (oldRow !== null && newRow !== null) {
 
-    //     var order = newRow.fields;
+        var order = newRow.fields;
 
-    //     id, company_id, invoice_number, order_number, invoice_status_code, invoiced_at, due_at, amount, currency_code, currency_rate, customer_id, customer_name, customer_email, customer_phone, customer_address, notes, created_at, updated_at, category_id, parent_id
+         let sql=`UPDATE dgi_invoices SET id='${order.order_id}' , invoice_number='${order.invoice_prefix}+${order.order_id}', amount='${order.total}',  currency_code='${order.currency_code}',customer_id='${order.customer_id}',customer_name='${order.firstname} ${order.lastname}',  customer_email='${order.email}', customer_phone='${order.telephone}' WHERE id = ${order.order_id}`;
 
-    //     let sql =`UPDATE dgi_invoices SET id='${name[0]}', invoice_number='${name[1]}' , email='${kullanici.email}', telephone='${kullanici.phone}' WHERE id = ${order.order_id}`;
-
-    //     let sql1 =`UPDATE dgi_invoice_items SET id='${name[0]}', invoice_number='${name[1]}' , email='${kullanici.email}', telephone='${kullanici.phone}'  WHERE id = ${order.order_id}`;
-
-    //     var query = akaunting.query(sql, function (error, results, fields) {
-    //         if (error) throw error;
-    //         console.log('Güncellenen Fatura Id:' + order.order_id);
-    // }
-    
-},
-  );
+       var query = akaunting.query(sql, function (error, results, fields) {
+             if (error) throw error;
+           console.log('Güncellenen Fatura Id:' + order.order_id);
+      });
+    }
+  
+    });
 }
-
 module.exports=order;
