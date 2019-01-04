@@ -19,6 +19,10 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json())
 
 
+app.get('/excellupload', function (req, res) {
+  res.render('excellupload');
+})
+
 
 app.get('/akauntingch', function (req, res) {
   var mysql = require('mysql');
@@ -214,6 +218,91 @@ app.post('/zirve', function (req, res) {
   var data=req.body;
   res.redirect('/zirve')
 })
+
+app.post('/excellread', function (req, res) {
+  if (!req.body) return res.sendStatus(400)
+  var data=req.body.upload;
+  
+  var XLSX = require('xlsx')
+  var mysql = require('mysql');
+  var format = require('date-format');
+
+  format(); 
+  format(new Date());
+  var date=format('yyyy-MM-dd hh:mm:ss', new Date())
+
+  var opencart = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'opencart'
+  });
+  
+  opencart.connect();
+
+  var workbook = XLSX.readFile(`../${data}`);
+  var sheet_name_list = workbook.SheetNames;
+  var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+  console.log(xlData);
+
+  xlData.forEach(item => {
+
+    let sql = `INSERT INTO oc_product(model, sku,
+      upc, ean, jan, isbn, mpn, location,quantity,
+      stock_status_id, image, manufacturer_id, shipping,
+      price, points, tax_class_id, date_available, weight,
+      weight_class_id, length, width, height,
+      length_class_id, subtract, minimum, sort_order,
+      status, date_added, date_modified) 
+    
+      VALUES (
+      'Product ${item.model}',
+      '${item.sku}','', '', '', '', '','',
+      '${item.quantity}','1','NULL', 
+      '1','1',
+      '${item.price}','0.0000', '1',
+      '${date}', '0.00000000', '1', 
+      '0.00000000', '0.00000000',
+       '0', '1', '1', '1', '0',
+      '1', 
+      '${date}','${date}')`;
+
+      
+
+      var query = opencart.query(sql, function (error, results, fields) {
+      if (error) throw error;
+      console.log('eKLENEN Ürün Id:' + results.insertId);
+
+      let sql1=`INSERT INTO oc_product_description(product_id,
+        language_id,name,description,tag,
+        meta_title,meta_description,meta_keyword)
+       VALUES(${results.insertId},'1',
+       '${item.name}','${item.description}'
+       ,'', '', '', '')`;
+
+       let sql2=`INSERT INTO oc_product_to_category (product_id,category_id) VALUES('${results.insertId}','20')`;
+
+       var query = opencart.query(sql1, function (error, results, fields) {
+        if (error) throw error;
+        console.log('eKLENEN Ürün Id:' + results.insertId);
+        });
+
+        var query = opencart.query(sql2, function (error, results, fields) {
+          if (error) throw error;
+          console.log('eKLENEN Ürün Id:' + results.insertId);
+          });
+
+      });
+
+     
+  })
+
+  res.render('excelldata',{xlData:xlData})
+})
+
+
+
+
 
 app.get('/akaunting', function (req, res) {
 
