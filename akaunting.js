@@ -31,13 +31,25 @@ var watcher = mysqlEventWatcher.add(
     if(event.tableId==118){
       var kullanici=newRow.fields;
       if (oldRow === null) {
-
+        var kullanici=newRow.fields;
         var name=String(kullanici.name);
         name=name.split(" ");
   
-         let sql = `INSERT INTO oc_customer(customer_id, customer_group_id, language_id, firstname, lastname,email, telephone, fax, password, salt, cart, wishlist, newsletter, address_id, custom_field, ip, status, safe, token, code, date_added)  VALUES ('${kullanici.id}', '1', '0', '${name[0]}', '${name[1]}', '${kullanici.email}', '${kullanici.phone}', 'null', 'null', 'null', NULL, NULL, '0', '0', '', '', '1', '1', '', '', '${date}')`;
+         let sql = `INSERT INTO oc_customer(customer_id, customer_group_id,
+           language_id, firstname, lastname,email, telephone, fax, password,
+            salt, cart, wishlist, newsletter, address_id, custom_field, ip,
+             status, safe, token, code, date_added)  VALUES ('${kullanici.id}',
+              '1', '0', '${name[0]}', '${name[1]}', '${kullanici.email}', 
+              '${kullanici.phone}', 'null', 'null', 'null', NULL, NULL, 
+              '0', '0', '', '', '1', '1', '', '', '${date}')`;
 
-         let sql2 = `INSERT INTO degisim_musteri(islem, customer_group_id, language_id, firstname, lastname,email, telephone, fax, password, salt, cart, wishlist, newsletter, address_id, custom_field, ip, status, safe, token, code, date_added)  VALUES ("Müşteri Eklendi",'1', '0', '${name[0]}', '${name[1]}', '${kullanici.email}', '${kullanici.phone}', 'null', 'null', 'null', NULL, NULL, '0', '0', '', '', '1', '1', '', '', '${date}')`;
+         let sql2 = `INSERT INTO degisim_musteri(islem, customer_group_id,
+           language_id, firstname, lastname,email, telephone, fax, password, 
+           salt, cart, wishlist, newsletter, address_id, custom_field, ip,
+            status, safe, token, code, date_added)  VALUES ("Müşteri Eklendi",
+            '1', '0', '${name[0]}', '${name[1]}', '${kullanici.email}', 
+            '${kullanici.phone}', 'null', 'null', 'null', NULL, NULL, 
+            '0', '0', '', '', '1', '1', '', '', '${date}')`;
   
          var query = opencart.query(sql, function (error, results, fields) {
            if (error) throw error;

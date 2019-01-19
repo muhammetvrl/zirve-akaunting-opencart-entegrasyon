@@ -3,7 +3,7 @@ var zirve= function (){
 var fs = require("fs");
 const sql = require("msnodesqlv8");
 const jsonfile = require('jsonfile');
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var format = require('date-format');
 var jsonDiff = require('json-diff')
 
@@ -18,12 +18,12 @@ opencart.connect();
 
 
 format(); 
-  format(new Date());
-  var date=format('yyyy-MM-dd hh:mm:ss', new Date());
-
-const connectionString = "server=localhost\\BITIRME;Database=BİTİRME_2018;Trusted_Connection=Yes;Driver={SQL Server}";
+format(new Date());
+var date=format('yyyy-MM-dd hh:mm:ss', new Date());
 
 const query = "SELECT * FROM dbo.stokgenm";
+
+const connectionString = "server=localhost\\BITIRME;Database=BİTİRME_2018;Trusted_Connection=Yes;Driver={SQL Server}";
 
 let data = fs.readFileSync('data.json');  
 let datajson = JSON.parse (data); 
@@ -40,7 +40,7 @@ sql.query(connectionString, query, (err, rows) => {
     });
 
     diffdata.forEach(element => {
-
+        console.log(element);
        if( element[0]=="+"){
         
         var product=element[1];

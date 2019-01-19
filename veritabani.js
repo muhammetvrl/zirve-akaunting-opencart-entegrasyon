@@ -1,5 +1,5 @@
 var dbwrite= function(){
-    var fs = require("fs");
+var fs = require("fs");
 const jsonfile = require('jsonfile');
 const sql = require("msnodesqlv8");
 
@@ -15,5 +15,4 @@ sql.query(connectionString, query, (err, rows) => {
     });
 });
 }
-
 module.exports=dbwrite;

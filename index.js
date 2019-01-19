@@ -2,27 +2,26 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var akauntingSync=require('./akaunting')
 var dbwrite=require('./veritabani')
+const {akauntingopencart,zirveopencart}=require('./dbconfig')
 var order=require('./order')
 var fs = require("fs");
 const sql = require("msnodesqlv8");
 const jsonfile = require('jsonfile');
 var mysql = require('mysql');
 var format = require('date-format');
-var jsonDiff = require('json-diff')
+var jsonDiff = require('json-diff');
 
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('view engine', 'pug');
 
-app.use(bodyParser.json())
 
 
 app.get('/excellupload', function (req, res) {
   res.render('excellupload');
 })
-
 
 app.get('/akauntingch', function (req, res) {
   var mysql = require('mysql');
@@ -87,6 +86,7 @@ app.get('/orderakaunting', function (req, res) {
   order();
   res.render('orderakaunting');
 })
+
 app.get('/orderakauntingch', function (req, res) {
   res.render('orderakauntingch');
 })
@@ -214,7 +214,16 @@ app.get('/zirve', function (req, res) {
 })
 
 app.post('/zirve', function (req, res) {
-  if (!req.body) return res.sendStatus(400)
+  if ((req.body.database != zirveopencart.database) ||     (req.body.user != zirveopencart.user) ||
+    ( req.body.host != zirveopencart.host) ||
+    (req.body.password != zirveopencart.password) ||
+    ( req.body.opencartdb != zirveopencart.opencartdb) ||
+    ( req.body.opencartuser != zirveopencart.opencartuser)||
+    ( req.body.opencarthost != zirveopencart.opencarthost) ||
+    ( req.body.opencartpw != zirveopencart.opencartpw)
+     ){
+    return res.sendStatus(400)
+  }
   var data=req.body;
   res.redirect('/zirve')
 })
@@ -240,6 +249,7 @@ app.post('/excellread', function (req, res) {
   
   opencart.connect();
 
+  
   var workbook = XLSX.readFile(`../${data}`);
   var sheet_name_list = workbook.SheetNames;
   var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
@@ -300,10 +310,6 @@ app.post('/excellread', function (req, res) {
   res.render('excelldata',{xlData:xlData})
 })
 
-
-
-
-
 app.get('/akaunting', function (req, res) {
 
 res.redirect("akauntingch")
@@ -311,8 +317,17 @@ res.redirect("akauntingch")
 })
 
 app.post('/akaunting', function (req, res) {
-  if (!req.body) return res.sendStatus(400)
-  
+  if ((req.body.database != akauntingopencart.database) ||    
+   (req.body.user != akauntingopencart.user) ||
+    ( req.body.host != akauntingopencart.host) ||
+    (req.body.password != akauntingopencart.password) ||
+    ( req.body.opencartdb != akauntingopencart.opencartdb) ||
+    ( req.body.opencartuser != akauntingopencart.opencartuser)||
+    ( req.body.opencarthost != akauntingopencart.opencarthost) ||
+    ( req.body.opencartpw != akauntingopencart.opencartpw)
+     ){
+    return res.sendStatus(400)
+  }
 res.render("akaunting",req.body)
 akauntingSync();
 
