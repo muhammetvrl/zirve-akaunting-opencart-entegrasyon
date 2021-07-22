@@ -18,7 +18,7 @@
     "node-xlsx": "^0.12.1",
     "pug": "^2.0.3",
     "read-excel-file": "^2.0.6",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "date-format": "^2.0.0",
