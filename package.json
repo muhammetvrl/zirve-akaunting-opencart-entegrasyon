@@ -17,7 +17,7 @@
     "mssql": "^4.3.0",
     "node-xlsx": "^0.12.1",
     "pug": "^2.0.3",
-    "read-excel-file": "^2.0.6",
+    "read-excel-file": "^5.5.0",
     "xlsx": "^0.14.1"
   },
   "devDependencies": {
